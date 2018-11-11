@@ -53,11 +53,37 @@
           center: {lat: 38.986, lng: -76.943},
           zoom: 3.2
         });
+	
+         map.data.setStyle(function(feature) {
+          var magnitude = feature.getProperty('mag');
+          return {
+            icon: getCircle(magnitude)
+          };
+        });
+      
+	      map.data.loadGeoJson('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
+		
+		map.data.setStyle(function(feature) {
+			
+
+
+	      map.data.loadGeoJson('https://data.humdata.org/dataset/a60ac839-920d-435a-bf7d-25855602699d/resource/7234d067-2d74-449a-9c61-22ae6d98d928/download/volcano.json');
+      
       }
-    </script>
+	
+	function getCircle(magnitude) {
+        return {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: '#3CB371',
+          fillOpacity: 1,
+          scale: Math.pow(2, magnitude) / 2,
+          strokeColor: 'white',
+          strokeWeight: .5
+        };
+      }
+   </script>
+	
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqmjBY3Sr-mS2oY58uKgzDN8C-yWvBw3M&callback=initMap"
     async defer></script>
-
-
   </body>
 </html>
