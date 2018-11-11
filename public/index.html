@@ -14,6 +14,16 @@
 	border-radius: 5px; 
 	margin-top: 40px; 
       }
+
+      #marker {
+	border-radius: 50%; 
+	width: 15px; 
+	height: 15px; 
+	background: #3CB371;
+	position: relative;
+	margin-left: 47px;
+	margin-top: 10px;
+      }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
@@ -25,11 +35,19 @@
 		text-align: center;
 		margin-top: 30px; 
       }
+	p {
+		margin-left: 20px;
+		position: relative;
+		margin-top: 20px; 
+	}
     </style>
   </head>
   <body>
 	<h3>GlobeLight</h3>
     <div id="map"></div>
+    <div id = "key">
+    	<p>earthquakes <div id = "marker"></div></p>
+    </div>
 	
 <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
 <script>
@@ -60,15 +78,25 @@
             icon: getCircle(magnitude)
           };
         });
+
+	      //map.data.addListener('mouseover', mouseInToRegion);
       
 	      map.data.loadGeoJson('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
 		
-		map.data.setStyle(function(feature) {
-			
-
+		/*map.data.setStyle(function(feature) {
+			return {
+				path: google.maps.SymbolPath.CIRCLE,
+				fillColor: "red",
+				fillOpacity: 1,
+				scale: 5,
+				strokeColor: 'white',
+				strokeWeight: .5
+			};
+		}
+		
 
 	      map.data.loadGeoJson('https://data.humdata.org/dataset/a60ac839-920d-435a-bf7d-25855602699d/resource/7234d067-2d74-449a-9c61-22ae6d98d928/download/volcano.json');
-      
+      */
       }
 	
 	function getCircle(magnitude) {
@@ -81,6 +109,9 @@
           strokeWeight: .5
         };
       }
+
+//	function mouseInToRegion(e) {
+//		e.feature.setProperty
    </script>
 	
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqmjBY3Sr-mS2oY58uKgzDN8C-yWvBw3M&callback=initMap"
